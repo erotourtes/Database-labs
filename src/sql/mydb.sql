@@ -5,22 +5,22 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema database_lab
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `mydb` ;
+DROP SCHEMA IF EXISTS `database_lab` ;
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema database_lab
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `database_lab` DEFAULT CHARACTER SET utf8 ;
+USE `database_lab` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Organization_list`
+-- Table `database_lab`.`Organization_list`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Organization_list` ;
+DROP TABLE IF EXISTS `database_lab`.`Organization_list` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Organization_list` (
+CREATE TABLE IF NOT EXISTS `database_lab`.`Organization_list` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `list_of_organizations` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
@@ -28,11 +28,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Role`
+-- Table `database_lab`.`Role`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Role` ;
+DROP TABLE IF EXISTS `database_lab`.`Role` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Role` (
+CREATE TABLE IF NOT EXISTS `database_lab`.`Role` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `description` VARCHAR(45) NULL,
@@ -41,11 +41,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`User`
+-- Table `database_lab`.`User`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`User` ;
+DROP TABLE IF EXISTS `database_lab`.`User` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`User` (
+CREATE TABLE IF NOT EXISTS `database_lab`.`User` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `login` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
@@ -59,23 +59,23 @@ CREATE TABLE IF NOT EXISTS `mydb`.`User` (
   INDEX `fk_User_Role1_idx` (`Role_id` ASC) VISIBLE,
   CONSTRAINT `fk_User_Organization_list1`
     FOREIGN KEY (`Organization_list_id`)
-    REFERENCES `mydb`.`Organization_list` (`id`)
+    REFERENCES `database_lab`.`Organization_list` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_User_Role1`
     FOREIGN KEY (`Role_id`)
-    REFERENCES `mydb`.`Role` (`id`)
+    REFERENCES `database_lab`.`Role` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Rating`
+-- Table `database_lab`.`Rating`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Rating` ;
+DROP TABLE IF EXISTS `database_lab`.`Rating` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Rating` (
+CREATE TABLE IF NOT EXISTS `database_lab`.`Rating` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `value` FLOAT NOT NULL,
   PRIMARY KEY (`id`))
@@ -83,11 +83,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Data`
+-- Table `database_lab`.`Data`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Data` ;
+DROP TABLE IF EXISTS `database_lab`.`Data` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Data` (
+CREATE TABLE IF NOT EXISTS `database_lab`.`Data` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `size` VARCHAR(45) NOT NULL,
   `format` VARCHAR(45) NOT NULL,
@@ -98,11 +98,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Post`
+-- Table `database_lab`.`Post`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Post` ;
+DROP TABLE IF EXISTS `database_lab`.`Post` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Post` (
+CREATE TABLE IF NOT EXISTS `database_lab`.`Post` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `title` VARCHAR(45) NOT NULL,
@@ -116,23 +116,23 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Post` (
   INDEX `fk_Post_Data1_idx` (`Data_id` ASC) VISIBLE,
   CONSTRAINT `fk_Post_Rating1`
     FOREIGN KEY (`Rating_id`)
-    REFERENCES `mydb`.`Rating` (`id`)
+    REFERENCES `database_lab`.`Rating` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Post_Data1`
     FOREIGN KEY (`Data_id`)
-    REFERENCES `mydb`.`Data` (`id`)
+    REFERENCES `database_lab`.`Data` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Access`
+-- Table `database_lab`.`Access`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Access` ;
+DROP TABLE IF EXISTS `database_lab`.`Access` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Access` (
+CREATE TABLE IF NOT EXISTS `database_lab`.`Access` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `time` DATETIME NOT NULL,
   `User_id` INT NOT NULL,
@@ -142,23 +142,23 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Access` (
   INDEX `fk_Access_Post1_idx` (`Post_id` ASC) VISIBLE,
   CONSTRAINT `fk_Access_User1`
     FOREIGN KEY (`User_id`)
-    REFERENCES `mydb`.`User` (`id`)
+    REFERENCES `database_lab`.`User` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Access_Post1`
     FOREIGN KEY (`Post_id`)
-    REFERENCES `mydb`.`Post` (`id`)
+    REFERENCES `database_lab`.`Post` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Category`
+-- Table `database_lab`.`Category`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Category` ;
+DROP TABLE IF EXISTS `database_lab`.`Category` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Category` (
+CREATE TABLE IF NOT EXISTS `database_lab`.`Category` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `description` VARCHAR(45) NOT NULL,
@@ -168,18 +168,18 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Category` (
   INDEX `fk_Category_Post1_idx` (`Post_id` ASC) VISIBLE,
   CONSTRAINT `fk_Category_Post1`
     FOREIGN KEY (`Post_id`)
-    REFERENCES `mydb`.`Post` (`id`)
+    REFERENCES `database_lab`.`Post` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Permission`
+-- Table `database_lab`.`Permission`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Permission` ;
+DROP TABLE IF EXISTS `database_lab`.`Permission` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Permission` (
+CREATE TABLE IF NOT EXISTS `database_lab`.`Permission` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
@@ -187,11 +187,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Permission_has_Role`
+-- Table `database_lab`.`Permission_has_Role`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Permission_has_Role` ;
+DROP TABLE IF EXISTS `database_lab`.`Permission_has_Role` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Permission_has_Role` (
+CREATE TABLE IF NOT EXISTS `database_lab`.`Permission_has_Role` (
   `Permission_id` INT NOT NULL,
   `Role_id` INT NOT NULL,
   PRIMARY KEY (`Permission_id`, `Role_id`),
@@ -199,23 +199,23 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Permission_has_Role` (
   INDEX `fk_Permission_has_Role_Permission1_idx` (`Permission_id` ASC) VISIBLE,
   CONSTRAINT `fk_Permission_has_Role_Permission1`
     FOREIGN KEY (`Permission_id`)
-    REFERENCES `mydb`.`Permission` (`id`)
+    REFERENCES `database_lab`.`Permission` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Permission_has_Role_Role1`
     FOREIGN KEY (`Role_id`)
-    REFERENCES `mydb`.`Role` (`id`)
+    REFERENCES `database_lab`.`Role` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Organizations`
+-- Table `database_lab`.`Organizations`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Organizations` ;
+DROP TABLE IF EXISTS `database_lab`.`Organizations` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Organizations` (
+CREATE TABLE IF NOT EXISTS `database_lab`.`Organizations` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `description` VARCHAR(45) NULL,
@@ -224,11 +224,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Organization_list_has_Organizations`
+-- Table `database_lab`.`Organization_list_has_Organizations`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Organization_list_has_Organizations` ;
+DROP TABLE IF EXISTS `database_lab`.`Organization_list_has_Organizations` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Organization_list_has_Organizations` (
+CREATE TABLE IF NOT EXISTS `database_lab`.`Organization_list_has_Organizations` (
   `Organization_list_id` INT NOT NULL,
   `Organizations_id` INT NOT NULL,
   PRIMARY KEY (`Organization_list_id`, `Organizations_id`),
@@ -236,12 +236,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Organization_list_has_Organizations` (
   INDEX `fk_Organization_list_has_Organizations_Organization_list1_idx` (`Organization_list_id` ASC) VISIBLE,
   CONSTRAINT `fk_Organization_list_has_Organizations_Organization_list1`
     FOREIGN KEY (`Organization_list_id`)
-    REFERENCES `mydb`.`Organization_list` (`id`)
+    REFERENCES `database_lab`.`Organization_list` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Organization_list_has_Organizations_Organizations1`
     FOREIGN KEY (`Organizations_id`)
-    REFERENCES `mydb`.`Organizations` (`id`)
+    REFERENCES `database_lab`.`Organizations` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -252,14 +252,14 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 --  Inserting Permissions, that roles can own --
-Insert Into mydb.permission (name) VALUES
+Insert Into database_lab.Permission (name) VALUES
 	('Create'),
     ('Edit'),
     ('Delete'),
     ('Execute');
 
 -- Inserting Roles --
-Insert into `mydb`.`role` (name, description) VALUES
+Insert into `database_lab`.`Role` (name, description) VALUES
 	('sadmin', 'System Administrator'),
     ('Developer', 'System Developer'),
     ('Moderator', 'Moderator'),
@@ -267,7 +267,7 @@ Insert into `mydb`.`role` (name, description) VALUES
 
 
 -- Correlating Roles with Permissions --
-Insert into mydb.permission_has_role (Role_id, Permission_id) VALUES
+Insert into database_lab.Permission_has_Role (Role_id, Permission_id) VALUES
 	(1, 1),
     (1, 2),
     (1, 3),
@@ -279,27 +279,27 @@ Insert into mydb.permission_has_role (Role_id, Permission_id) VALUES
     (3, 3);
 
 -- Creating Organizations list for new Users --
-Insert Into mydb.organization_list (list_of_organizations) Values
+Insert Into database_lab.Organization_list (list_of_organizations) Values
 	('user1_login'),
     ('user2_login'),
     ('user3_login'),
     ('user4_login');
 
 -- Creating new Users with org.list id from prev action and role id --
-Insert into mydb.user (login, password, mail, name, Organization_list_id, Role_id) Values
+Insert into database_lab.User (login, password, mail, name, Organization_list_id, Role_id) Values
 	('user1_login', 'qwerty123', 'user1_login@gamil.com', 'User 1', 1, 1),
     ('user2_login', 'qwerty123', 'user2_login@gamil.com', 'User 2', 2, 2),
     ('user3_login', 'qwerty123', 'user3_login@gamil.com', 'User 3', 3, 3),
     ('user4_login', 'qwerty123', 'user4_login@gamil.com', 'User 4', 4, 4);
 
 -- Creating organizations --
-Insert into mydb.organizations (name, description) Values
+Insert into database_lab.Organizations (name, description) Values
 	('Organization A', 'Provides some goods for A Group'),
     ('Organization B', 'Provides some goods for B Group'),
     ('Organization C', 'Provides some goods for C Group');
 
 -- Inserting organizations into user's org.list --
-Insert into mydb.organization_list_has_organizations
+Insert into database_lab.Organization_list_has_Organizations
 	(Organization_list_id, Organizations_id)
     Values
 	(1, 3),
@@ -311,20 +311,20 @@ Insert into mydb.organization_list_has_organizations
     (4, 2);
 
 -- Inserting data info before post creating --
-Insert Into mydb.data (size, format, name, uploadedAt) Values
+Insert Into database_lab.Data (size, format, name, uploadedAt) Values
 	('2.5mb', 'png', 'png1', '2023-11-16'),
     ('3.1mb', 'png', 'png2', '2023-11-16'),
     ('1.7mb', 'png', 'png3', '2023-11-16');
 
 -- Inserting Def. rating for each post --
-Insert into mydb.rating (value) Values
+Insert into database_lab.Rating (value) Values
 	(0.0),
     (0.0),
     (0.0);
 
 
 -- Creating Post --
-Insert into mydb.post
+Insert into database_lab.Post
 	(
 		name, title, description, uploadedAt, updatedAt, Rating_id, Data_id
 	) Values
@@ -339,13 +339,13 @@ Insert into mydb.post
     );
 
 -- Adding Access info for each post and specific users --
-Insert into mydb.access (time, User_id, Post_id) Values
+Insert into database_lab.Access (time, User_id, Post_id) Values
 	('2023-11-16', 1, 1),
     ('2023-11-16', 1, 2),
     ('2023-11-16', 3, 3);
 
 -- Correlating Categories with posts --
-Insert into mydb.category (name, description, Post_id, Category_id) Values
+Insert into database_lab.Category (name, description, Post_id, Category_id) Values
 	('Abstract cat name1', 'abc description', 1, 1),
 	('Abstract cat name1', 'abc description', 2, 1),
 	('Abstract cat name2', 'abc description', 3, 2);
