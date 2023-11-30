@@ -2,7 +2,7 @@
 
 В рамках проекту розробляється:
 - ~~SQL-скрипт для створення на початкового наповнення бази даних~~
-- RESTfull сервіс для управління даними
+- ~~RESTfull сервіс для управління даними~~
 
 ## SQL-Скрипт для створення початкового наповнення бази даних
 ```sql
@@ -361,4 +361,4 @@ Insert into mydb.category (name, description, Post_id, Category_id) Values
 
 
 ## RESTfull Сервіс для управління даними
-*У розробці...*
+[link to repo](https://github.com/erotourtes/Database-coursework)
