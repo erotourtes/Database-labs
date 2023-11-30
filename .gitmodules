@@ -1,0 +1,3 @@
+[submodule "src/js/course-work"]
+	path = src/js/course-work
+	url = git@github.com:erotourtes/Database-coursework.git
